@@ -19,8 +19,8 @@ class Filesystem implements FilesystemOperator
 {
     use CalculateChecksumFromStream;
 
-    private Config $config;
-    private PathNormalizer $pathNormalizer;
+    private readonly Config $config;
+    private readonly PathNormalizer $pathNormalizer;
 
     public function __construct(
         private FilesystemAdapter $adapter,
@@ -45,7 +45,7 @@ class Filesystem implements FilesystemOperator
 
     public function has(string $location): bool
     {
-        $path = $this->pathNormalizer->normalizePath($location);
+        $path = $this->pathNormalizer->normalizePath($location) ;
 
         return $this->adapter->fileExists($path) || $this->adapter->directoryExists($path);
     }
